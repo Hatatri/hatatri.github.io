@@ -1,4 +1,3 @@
-# Hicham ATATRI
 **Professeur agrégé en Informatique**  
 Enseignant en classes préparatoires
 
