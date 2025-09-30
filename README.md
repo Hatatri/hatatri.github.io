@@ -1,2 +1,1 @@
-# hatatri.github.io
 Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE). Passionné par l’algorithmique, la programmation et la pédagogie, je propose ici des supports de cours, exercices, projets et ressources pour accompagner les étudiants vers la réussite aux concours.
