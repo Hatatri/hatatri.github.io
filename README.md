@@ -1,6 +1,6 @@
 # Hicham ATATRI
 **Professeur agrégé en Informatique**  
-Enseignant en classes préparatoires · Expert en développement et qualité logicielle  
+Enseignant en classes préparatoires
 
 📍 Kenitra, Maroc  
 📧 [hichamatatri@gmail.com](mailto:hichamatatri@gmail.com)  
