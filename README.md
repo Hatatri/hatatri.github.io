@@ -1,10 +1,4 @@
----
-layout: default
-title: "Hicham Atatri - Profil Professionnel"
----
-
-# Hicham Atatri
-
+# Hicham ATATRI
 **Professeur agrégé en Informatique**  
 Enseignant en classes préparatoires · Expert en développement et qualité logicielle  
 
