@@ -3,13 +3,14 @@
 - Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE)
 - Passionné par l’algorithmique, la programmation et la pédagogie
 - Propose des supports de cours, exercices, projets et ressources
-- Objectif : accompagner les étudiants vers la réussite aux concours  
-📍 Kenitra, Maroc  
-📧 [hichamatatri@gmail.com](mailto:hichamatatri@gmail.com)  
-📞 +212 6 37 19 20 77  
+- Objectif : accompagner les étudiants vers la réussite aux concours
+  
+- Kenitra, Maroc
+- [hichamatatri@gmail.com](mailto:hichamatatri@gmail.com)
+- +212 637 192 077  
 ---
 
-## 🎓 Formation
+## Formation
 
 - **2025** : Professeur agrégé en Informatique  
 - **2019 – 2024** : Professeur en classes préparatoires (ECS-ECT)  
@@ -20,7 +21,7 @@
 
 ---
 
-## 💼 Expériences Professionnelles
+## Expériences Professionnelles
 
 - **2019 – 2024** : Professeur en classes préparatoires (ECS-ECT)  
 - **2006 – 2019** : Professeur d’informatique – Rabat  
@@ -30,7 +31,7 @@
 
 ---
 
-## 🛠️ Compétences
+## Compétences
 
 - **Développement Web** : HTML5, PHP, Frameworks JavaScript, ... 
 - **Conception & Analyse** : UML, Merise, E/A  
@@ -57,7 +58,7 @@
 
 ---
 
-## 🌐 Langues 
+## Langues 
 
 - **Arabe** : ★★★★★  
 - **Français** : ★★★★★  
@@ -65,7 +66,7 @@
 
 ---
 
-## 🌱 Centres d’intérêt
+## Centres d’intérêt
 
 - Randonnée, trekking  
 - Natation  
