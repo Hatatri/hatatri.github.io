@@ -1,10 +1,9 @@
 **Professeur agrégé en Informatique**  
 Enseignant en classes préparatoires
-
+![Photo de profil](Hicham ATATRI.png){: style="width:150px; border-radius:50%;"}
 📍 Kenitra, Maroc  
 📧 [hichamatatri@gmail.com](mailto:hichamatatri@gmail.com)  
 📞 +212 6 37 19 20 77  
-![Photo de profil](Hicham ATATRI.png){: style="width:150px; border-radius:50%;"}
 ---
 
 ## 🎓 Formation
