@@ -55,11 +55,11 @@ Enseignant en classes préparatoires
 
 ---
 
-## 🌐 Langues
+## 🌐 Langues 
 
 - **Arabe** : ★★★★★  
 - **Français** : ★★★★★  
-- **Anglais** : ★★★★★  
+- **Anglais** : ★★★  
 
 ---
 
@@ -72,7 +72,6 @@ Enseignant en classes préparatoires
 - Encadrement des jeunes en centres de tourisme  
 
 ---
-title: "HA"
----
+title: "HICHAM ATATRI"
 
 © 2025
