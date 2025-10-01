@@ -1,6 +1,9 @@
 **Professeur agrégé en Informatique**  
-Enseignant en classes préparatoires  
 ![Photo de profil](Hicham ATATRI.png){: style="width:150px; border-radius:50%;"}  
+- Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE)
+- Passionné par l’algorithmique, la programmation et la pédagogie
+- Propose des supports de cours, exercices, projets et ressources
+- Objectif : accompagner les étudiants vers la réussite aux concours  
 📍 Kenitra, Maroc  
 📧 [hichamatatri@gmail.com](mailto:hichamatatri@gmail.com)  
 📞 +212 6 37 19 20 77  
