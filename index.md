@@ -72,8 +72,7 @@ Enseignant en classes préparatoires
 - Encadrement des jeunes en centres de tourisme  
 
 ---
-layout: default
-title: "Hicham Atatri - Profil Professionnel"
+title: "HA"
 ---
 
-© 2025 - Hicham Atatri
+© 2025
