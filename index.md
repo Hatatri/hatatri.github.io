@@ -14,7 +14,7 @@ Enseignant en classes préparatoires
 - **2007 – 2009** : Master en Qualité Logicielle – UIT Kénitra  
 - **2005 – 2006** : Centre Pédagogique Régional – Settat (Informatique)  
 - **2003 – 2006** : Licence en Sciences Mathématiques et Informatique – UIT Kénitra  
-- **1998 – 2001** : Baccalauréat en Sciences Mathématiques – Kénitra  
+- **1998 – 2001** : Baccalauréat en Sciences Mathématiques A – Kénitra  
 
 ---
 
@@ -30,12 +30,28 @@ Enseignant en classes préparatoires
 
 ## 🛠️ Compétences
 
-- **Développement Web** : HTML5, PHP, Frameworks JavaScript  
-- **Conception & Analyse** : UML, Merise  
-- **Bases de Données & Big Data** : SQL Server, MySQL, NoSQL, Hadoop  
-- **Machine Learning & Data Science** : Python, R  
-- **Qualité Logicielle** : CMMI, ISO, CoBIT  
-- **Gestion de Projet** : GANTT, MS Project, SCRUM  
+- **Développement Web** : HTML5, PHP, Frameworks JavaScript, ... 
+- **Conception & Analyse** : UML, Merise, E/A  
+- **Bases de Données & Big Data** : SQL Server, MySQL, NoSQL, Hadoop, MongoDB ...  
+- **Machine Learning & Data Science** :
+  >  Maîtrise de Python (Pandas, Scikit-learn, TensorFlow, PyTorch), SQL, R
+  >  Compétences en régression, classification, clustering, NLP, réseaux de neurones
+  > Expérience en analyse exploratoire, feature engineering, évaluation de modèles
+  > Projets : prédiction de séries temporelles, analyse de sentiments, détection d’anomalies
+  > Visualisation de données (Matplotlib, Seaborn, Plotly, Power BI, Tableau)  
+- **Qualité Logicielle** :
+  > **Commits clairs et fréquents**  : Utiliser des messages explicites : `Ajouter`, `Corriger`, `Améliorer`.
+  > **Organisation du projet** : Dossiers séparés : `src/`, `tests/`, `docs/`
+  > **Tests unitaires**  : pytest, testmod...
+  > **Documentation**  : Ajouter des `docstrings` aux fonctions et classes.
+  > **Style de code**  : Respecter PEP8 (Python).
+- **Gestion de Projet** :
+  > **Objectifs clairs**  : Définir les buts du projet et les livrables attendus.
+  > **Organisation des tâches**  : Créer un **Kanban GitHub Projects** (To Do / In Progress / Done).
+  > **Planification**  : Estimer l’effort (temps, complexité).
+  > **Suivi collaboratif**  : Utiliser des branches par fonctionnalité, Pull Requests pour révision avant intégration.
+  > **Documentation continue**.
+  > **Évaluation**  : Revoir la qualité du code et la progression du projet régulièrement. 
 
 ---
 
