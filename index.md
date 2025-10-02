@@ -1,11 +1,5 @@
 
-  <!-- Bouton CV -->
-  <p>
-    <a href="cv.pdf" style="background:#fff; color:#004080; padding:10px 20px; 
-       border-radius:20px; text-decoration:none; font-weight:bold;">
-      📄 Télécharger mon CV
-    </a>
-  </p>
+  
   <style>
     .profile {
       display: flex;
@@ -106,6 +100,14 @@
 - Spéléologie  
 - Encadrement des jeunes en centres de tourisme  
 
+---
+<!-- Bouton CV -->
+  <p>
+    <a href="cv.pdf" style="background:#fff; color:#004080; padding:10px 20px; 
+       border-radius:20px; text-decoration:none; font-weight:bold;">
+      📄 Télécharger une copie
+    </a>
+  </p>
 ---
 title: "HICHAM ATATRI"
 
