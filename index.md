@@ -1,32 +1,33 @@
-<style>
-.profile {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.profile img {
-  border-radius: 50%;
-  width: 150px;
-  margin-right: 20px;
-}
-.profile-info h1 {
-  margin: 0;
-  font-size: 28px;
-  color: #003366;
-}
-.profile-info p {
-  margin: 5px 0;
-  color: #555;
-}
-</style>
+<div style="text-align:center; padding:40px; background:linear-gradient(135deg,#004080,#009966); color:white; border-radius:8px;">
+  
+  <h1 style="margin:0; font-size:40px;">Hicham ATATRI</h1>
+  <p style="font-size:18px; margin:5px 0;">Professeur agrégé en Informatique – Enseignant en classes préparatoires</p>
+  
+  <!-- Slogan -->
+  <p style="font-size:16px; font-style:italic; margin:10px 0;">
+    « Transmettre le savoir, former les ingénieurs de demain »
+  </p>
 
-<div class="profile">
-  <img src="Hicham ATATRI.png" alt="Photo de profil">
-  <div class="profile-info">
-    <h1>Hicham ATATRI</h1>
-    <p><b>Professeur agrégé en Informatique</b></p>
-    <p>📍 Kénitra, Maroc | ✉️ hichamatatri@gmail.com | ☎️ +212 637 192 077</p>
-  </div>
+  <!-- Icônes -->
+  <p>
+    <a href="https://github.com/tonprofil" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/30/ffffff/github.png" alt="GitHub"/>
+    </a>
+    <a href="https://linkedin.com/in/tonprofil" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn"/>
+    </a>
+    <a href="mailto:hichamatatri@gmail.com">
+      <img src="https://img.icons8.com/ios-filled/30/ffffff/new-post.png" alt="Email"/>
+    </a>
+  </p>
+
+  <!-- Bouton CV -->
+  <p>
+    <a href="cv.pdf" style="background:#fff; color:#004080; padding:10px 20px; 
+       border-radius:20px; text-decoration:none; font-weight:bold;">
+      📄 Télécharger mon CV
+    </a>
+  </p>
 </div>
 
 ## Professeur agrégé en Informatique   
