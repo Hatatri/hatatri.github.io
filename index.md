@@ -6,8 +6,6 @@
       📄 Télécharger mon CV
     </a>
   </p>
-  
-  <h1 style="margin:0; font-size:40px;">Hicham ATATRI</h1>
   <p style="font-size:18px; margin:5px 0;">Professeur agrégé en Informatique – Enseignant en classes préparatoires</p>
   
   <!-- Slogan -->
