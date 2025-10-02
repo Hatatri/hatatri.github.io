@@ -15,34 +15,31 @@
     « Transmettre le savoir, former les ingénieurs de demain »
   </p>
   <style>
-.profile {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.profile img {
-  border-radius: 50%;
-  width: 150px;
-  margin-right: 20px;
-}
-.profile-info h1 {
-  margin: 0;
-  font-size: 28px;
-  color: #003366;
-}
-.profile-info p {
-  margin: 5px 0;
-  color: #555;
-}
-</style>
+      .profile {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .profile img {
+        border-radius: 50%;
+        width: 150px;
+        margin-right: 20px;
+      }
+      .profile-info h1 {
+        margin: 0;
+        font-size: 28px;
+        color: #003366;
+      }
+      .profile-info p {
+        margin: 5px 0;
+        color: #555;
+      }
+  </style>
 
-<div class="profile">
-  <img src="Hicham ATATRI.png" alt="Photo de profil">
-  <div class="profile-info">
-    <h1>Hicham ATATRI</h1>
-    <p><b>Professeur agrégé en Informatique</b></p>
-    <p>📍 Kénitra, Maroc | ✉️ hichamatatri@gmail.com | ☎️ +212 637 192 077</p>
-  </div>
+    <div class="profile">
+      <div class="profile-info">
+        <p>📍 Kénitra, Maroc | ✉️ hichamatatri@gmail.com | ☎️ +212 637 192 077</p>
+    </div>
 </div>
   <!-- Icônes -->
   <p>
