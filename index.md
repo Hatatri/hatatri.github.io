@@ -1,4 +1,4 @@
-<div style="text-align:center; padding:60px; background:linear-gradient(135deg,#004080,#009966); color:white; border-radius:8px;">
+<div>
   
   <h1 style="margin:0; font-size:40px;">Hicham ATATRI</h1>
   <p style="font-size:18px; margin:5px 0;">Professeur agrégé en Informatique – Enseignant en classes préparatoires</p>
@@ -10,10 +10,10 @@
 
   <!-- Icônes -->
   <p>
-    <a href="https://github.com/tonprofil" target="_blank">
+    <a href="https://github.com/hatatri" target="_blank">
       <img src="https://img.icons8.com/ios-filled/30/ffffff/github.png" alt="GitHub"/>
     </a>
-    <a href="https://linkedin.com/in/tonprofil" target="_blank">
+    <a href="https://linkedin.com/in/hichamatatri" target="_blank">
       <img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn"/>
     </a>
     <a href="mailto:hichamatatri@gmail.com">
