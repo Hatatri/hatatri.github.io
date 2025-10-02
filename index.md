@@ -86,9 +86,9 @@
 
 ## Langues 
 
-- **Arabe** : ★★★★★  
+- **Arabe**    : ★★★★★  
 - **Français** : ★★★★★  
-- **Anglais** : ★★★  
+- **Anglais**  : ★★★  
 
 ---
 
