@@ -29,7 +29,10 @@
   </style>
 
 <div class="profile">
-  <img src="Hicham ATATRI.png" alt="Photo de profil">
+  <img src="Hicham ATATRI.png" alt="Photo de profil">  
+    <p style="font-size:16px; font-style:italic; margin:10px 0;">
+      « Transmettre le savoir, former les ingénieurs de demain »
+    </p>
   <div class="profile-info">
     <p>📍 Kénitra, Maroc | ✉️ hichamatatri@gmail.com | ☎️ +212 637 192 077</p>
   </div>
