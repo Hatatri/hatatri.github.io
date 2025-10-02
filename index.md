@@ -31,7 +31,7 @@
 <div class="profile">
   <img src="Hicham ATATRI.png" alt="Photo de profil">
   <div class="profile-info">
-    <h1>Hicham ATATRI</h1>
+    <h1></h1>
     <p><b>Professeur agrégé en Informatique</b></p>
     <p>📍 Kénitra, Maroc | ✉️ hichamatatri@gmail.com | ☎️ +212 637 192 077</p>
   </div>
