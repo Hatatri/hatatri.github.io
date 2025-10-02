@@ -29,8 +29,7 @@
   </div>
 </div>
 
-**Professeur agrégé en Informatique**  
-![Photo de profil](Hicham ATATRI.png){: style="width:150px; border-radius:50%;"}  
+**Professeur agrégé en Informatique**   
 - Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE)
 - Passionné par l’algorithmique, la programmation et la pédagogie
 - Propose des supports de cours, exercices, projets et ressources
