@@ -40,6 +40,7 @@
     </div>
 </div>
   <!-- Icônes -->
+  <div>
   <p>
     <a href="https://github.com/hatatri" target="_blank">
       <img src="https://img.icons8.com/ios-filled/30/ffffff/github.png" alt="GitHub"/>
