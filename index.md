@@ -39,21 +39,7 @@
         <p>📍 Kénitra, Maroc | ✉️ hichamatatri@gmail.com | ☎️ +212 637 192 077</p>
       </div>
     </div>
-  <!-- Icônes -->
-  <div>
-    <p>
-    <a href="https://github.com/hatatri" target="_blank">
-      <img src="https://img.icons8.com/ios-filled/30/ffffff/github.png" alt="GitHub"/>
-    </a>
-    <a href="https://linkedin.com/in/hichamatatri" target="_blank">
-      <img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn"/>
-    </a>
-    <a href="mailto:hichamatatri@gmail.com">
-      <img src="https://img.icons8.com/ios-filled/30/ffffff/new-post.png" alt="Email"/>
-    </a>
-    </p>
-   </div>
-
+</div>
 ## Professeur agrégé en Informatique   
 - Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE)
 - Passionné par l’algorithmique, la programmation et la pédagogie
