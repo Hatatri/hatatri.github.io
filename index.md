@@ -29,7 +29,7 @@
   </div>
 </div>
 
-**Professeur agrégé en Informatique**   
+## Professeur agrégé en Informatique   
 - Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE)
 - Passionné par l’algorithmique, la programmation et la pédagogie
 - Propose des supports de cours, exercices, projets et ressources
@@ -42,8 +42,7 @@
 
 ## Formation
 
-- **2025** : Professeur agrégé en Informatique  
-- **2019 – 2024** : Professeur en classes préparatoires (ECS-ECT)  
+- **2024 - 2025** : Agrégation en Informatique   
 - **2007 – 2009** : Master en Qualité Logicielle – UIT Kénitra  
 - **2005 – 2006** : Centre Pédagogique Régional – Settat (Informatique)  
 - **2003 – 2006** : Licence en Sciences Mathématiques et Informatique – UIT Kénitra  
@@ -53,9 +52,9 @@
 
 ## Expériences Professionnelles
 
-- **2019 – 2024** : Professeur en classes préparatoires (ECS-ECT)  
+- **2019 – 2024** : Professeur en classes préparatoires des grandes ecoles des ingenieurs   
 - **2006 – 2019** : Professeur d’informatique – Rabat  
-- **2015** : Formateur – Hirshman Automotive  
+- **2015** : Formateur VBA/Excel a Hirshman Automotive Kenitra  
 - **2011** : Consultant – Arig (Tierce Maintenance Applicative, tests, intégration)  
 - **2011** : Vacataire – Faculté des sciences UIT Kénitra (Cours C++, encadrement Master)  
 
