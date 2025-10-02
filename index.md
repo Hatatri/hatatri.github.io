@@ -33,11 +33,8 @@
 - Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE)
 - Passionné par l’algorithmique, la programmation et la pédagogie
 - Propose des supports de cours, exercices, projets et ressources
-- Objectif : accompagner les étudiants vers la réussite aux concours
+- Objectif : accompagner les étudiants vers la réussite aux concours  
   
-- Kenitra, Maroc
-- [hichamatatri@gmail.com](mailto:hichamatatri@gmail.com)
-- +212 637 192 077  
 ---
 
 ## Formation
