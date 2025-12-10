@@ -105,10 +105,10 @@
   <p>
     <a href="cv.pdf" style="background:#fff; color:#004080; padding:10px 20px; 
        border-radius:20px; text-decoration:none; font-weight:bold;">
-      📄 Télécharger une copie
+      📄 Télécharger
     </a>
   </p>
 ---
-title: "HICHAM ATATRI"
+
 
 © 2025
