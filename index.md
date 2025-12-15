@@ -29,8 +29,7 @@
   </div>
 </div>
 
-## Professeur agrégé en Informatique   
-- Professeur agrégé d’informatique en classes préparatoires scientifiques (CPGE)
+## Professeur agrégé en Informatique 
 - Passionné par l’algorithmique, la programmation et la pédagogie
 - Propose des supports de cours, exercices, projets et ressources
 - Objectif : accompagner les étudiants vers la réussite aux concours  
@@ -39,7 +38,8 @@
 
 ## Formation
 
-- **2024 - 2025** : Agrégation en Informatique   
+- **2024 - 2025** : Agrégation en Informatique
+- **2017 - 2019** : Formation au centre de preparation d'agregagtion (Maarrakech)
 - **2007 – 2009** : Master en Qualité Logicielle – UIT Kénitra  
 - **2005 – 2006** : Centre Pédagogique Régional – Settat (Informatique)  
 - **2003 – 2006** : Licence en Sciences Mathématiques et Informatique – UIT Kénitra  
