@@ -1,2 +1,4 @@
 title: "Hicham ATATRI"
 theme: jekyll-theme-cayman
+exclude:
+  - README.md

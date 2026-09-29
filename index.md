@@ -25,11 +25,11 @@
 <div class="profile">
   <img src="Hicham ATATRI.png" alt="Photo de profil">  
   <div class="profile-info">
-    <p>📍 Kénitra, Maroc | ✉️ hichamatatri@gmail.com | ☎️ +212 637 192 077</p>
+    <p>📍 Rabat, Maroc | ✉️ <a href="mailto:hichamatatri@gmail.com">hichamatatri@gmail.com</a></p>
   </div>
 </div>
 
-## Professeur agrégé en Informatique 
+## Professeur agrégé d’informatique en CPGE (MPSI / MP) 
 - Passionné par l’algorithmique, la programmation et la pédagogie
 - Propose des supports de cours, exercices, projets et ressources
 - Objectif : accompagner les étudiants vers la réussite aux concours  
@@ -39,7 +39,7 @@
 ## Formation
 
 - **2024 - 2025** : Agrégation en Informatique
-- **2017 - 2019** : Formation au centre de preparation d'agregagtion (Maarrakech)
+- **2017 - 2019** : Formation au centre de préparation à l’agrégation (Marrakech)
 - **2007 – 2009** : Master en Qualité Logicielle – UIT Kénitra  
 - **2005 – 2006** : Centre Pédagogique Régional – Settat (Informatique)  
 - **2003 – 2006** : Licence en Sciences Mathématiques et Informatique – UIT Kénitra  
@@ -49,11 +49,21 @@
 
 ## Expériences Professionnelles
 
-- **2019 – 2024** : Professeur en classes préparatoires des grandes ecoles des ingenieurs   
+- **Actuellement** : Professeur agrégé d’informatique en classes préparatoires (MPSI / MP) – Centre Molay Youssef, Rabat  
+- **2019 – 2024** : Professeur en classes préparatoires aux grandes écoles d’ingénieurs   
 - **2006 – 2019** : Professeur d’informatique – Rabat  
-- **2015** : Formateur VBA/Excel a Hirshman Automotive Kenitra  
+- **2015** : Formateur VBA/Excel à Hirshman Automotive Kenitra  
 - **2011** : Consultant – Arig (Tierce Maintenance Applicative, tests, intégration)  
 - **2011** : Vacataire – Faculté des sciences UIT Kénitra (Cours C++, encadrement Master)  
+
+---
+
+## Projets
+
+- **[Elprepa](https://elprepa.online)** : plateforme pédagogique des classes préparatoires (cours, séquences, notebooks Python interactifs, rendus, corrections et suivi des élèves).
+- **[Informatique MP : algorithmique](https://github.com/Hatatri/MP-PSI-Algorithmique)** : cours, notebooks et exercices pour la 2ᵉ année MP.
+- **[Mosquée du douar Kariz](https://hatatri.github.io/mosque-ennour/)** : site de collecte de dons pour l’association Al Karama.
+- Tous mes projets publics : [github.com/Hatatri](https://github.com/Hatatri)
 
 ---
 
@@ -105,10 +115,10 @@
   <p>
     <a href="cv.pdf" style="background:#fff; color:#004080; padding:10px 20px; 
        border-radius:20px; text-decoration:none; font-weight:bold;">
-      📄 Télécharger
+      📄 Télécharger le CV (PDF)
     </a>
   </p>
 ---
 
 
-© 2025
+© Hicham ATATRI
