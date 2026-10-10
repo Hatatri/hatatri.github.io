@@ -1,0 +1,20 @@
+# Catégories disponibles pour les projets (_data/repositories.yml → champ `category`).
+# id     : identifiant (kebab-case, référencé par les projets)
+# label  : libellé affiché
+# emoji  : pictogramme affiché sur les cartes
+- id: enseignement
+  label: Enseignement
+  emoji: "🎓"
+  description: Cours, exercices et notebooks pour les classes préparatoires (MPSI, PCSI, MP, PC).
+- id: recherche
+  label: Recherche
+  emoji: "🔬"
+  description: Travaux de thèse — jumeau numérique écologique (Ecological Digital Twin), données environnementales et agricoles.
+- id: web
+  label: Web
+  emoji: "🌐"
+  description: Sites et plateformes web.
+- id: outils
+  label: Outils
+  emoji: "🛠️"
+  description: Scripts, utilitaires et automatisations.

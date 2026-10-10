@@ -1,0 +1,20 @@
+---
+layout: default
+---
+{%- comment -%}
+  Page détaillée d'un projet (_projects/<slug>.md).
+  Les métadonnées viennent de _data/repositories.yml (source unique) ;
+  le fichier Markdown ne contient que le texte de présentation détaillé.
+{%- endcomment -%}
+{%- assign repo = site.data.repositories | where: "slug", page.slug | first -%}
+{%- if repo -%}
+<div class="repo-detail">
+  {% include repo-card.html repo=repo %}
+</div>
+{%- endif %}
+
+<div class="repo-detail__content">
+{{ content }}
+</div>
+
+<p><a href="{{ '/projets/' | relative_url }}#{{ page.slug }}">← Retour à la liste des projets</a></p>

@@ -1,0 +1,71 @@
+# ===========================================================================
+#  Projets / dépôts validés affichés sur https://hatatri.github.io/projets/
+#  Source de vérité unique : les pages Projets, Chronologie, le flux RSS,
+#  les statistiques et la section « Projets » de l'accueil sont générés
+#  à partir de ce fichier.
+#
+#  Ajout automatique : workflow « Ajouter un projet » (voir README.md)
+#  Ajout manuel     : copier un bloc ci-dessous puis lancer
+#                     python3 scripts/validate_data.py
+#
+#  Champs :
+#    slug        (obligatoire) identifiant unique en kebab-case
+#    name        (obligatoire) nom affiché
+#    description (obligatoire) une ou deux phrases
+#    category    (obligatoire) id présent dans _data/categories.yml
+#    added       (obligatoire) date d'ajout au site, format AAAA-MM-JJ
+#    repo        dépôt GitHub « propriétaire/nom » (active les badges)
+#    url         lien principal si le projet n'est pas sur GitHub
+#    homepage    site web du projet (https://…)
+#    language    langage principal (alimente les statistiques)
+#    tags        liste de mots-clés en minuscules
+#    status      actif | en-developpement | archive   (défaut : actif)
+#    featured    true pour afficher le projet sur la page d'accueil
+#  Au moins un des champs `repo` ou `url` est requis.
+# ===========================================================================
+
+- slug: elprepa
+  name: Elprepa
+  description: Plateforme pédagogique des classes préparatoires — cours, séquences, notebooks Python interactifs, rendus, corrections et suivi des élèves.
+  category: enseignement
+  url: https://elprepa.online
+  homepage: https://elprepa.online
+  language: Python
+  tags: [cpge, plateforme, python, notebooks]
+  added: 2026-10-10
+  status: actif
+  featured: true
+
+- slug: mp-psi-algorithmique
+  name: "Informatique MP : algorithmique"
+  description: Cours, notebooks et exercices d'algorithmique pour la 2ᵉ année MP.
+  category: enseignement
+  repo: Hatatri/MP-PSI-Algorithmique
+  language: Jupyter Notebook
+  tags: [cpge, mp, algorithmique, python, notebooks]
+  added: 2026-10-10
+  status: actif
+  featured: true
+
+- slug: mosque-ennour
+  name: Mosquée du douar Kariz
+  description: Site de collecte de dons pour l'association Al Karama.
+  category: web
+  repo: Hatatri/mosque-ennour
+  homepage: https://hatatri.github.io/mosque-ennour/
+  language: HTML
+  tags: [association, site-web]
+  added: 2026-10-10
+  status: actif
+  featured: true
+
+- slug: hatatri-github-io
+  name: Site personnel
+  description: Ce site — Jekyll, GitHub Pages et déploiement continu par GitHub Actions (validation des données, HTML et liens).
+  category: outils
+  repo: Hatatri/hatatri.github.io
+  homepage: https://hatatri.github.io
+  language: HTML
+  tags: [jekyll, github-actions, ci-cd]
+  added: 2026-10-10
+  status: actif

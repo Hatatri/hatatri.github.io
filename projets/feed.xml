@@ -1,0 +1,35 @@
+---
+layout: null
+permalink: /projets/feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+{%- comment -%} Flux RSS 2.0 des projets, généré sans plugin depuis _data/repositories.yml {%- endcomment -%}
+{%- assign repos = site.data.repositories | sort: "added" | reverse -%}
+{%- assign last = repos | first %}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.title | xml_escape }} — nouveaux projets</title>
+    <link>{{ '/projets/' | absolute_url }}</link>
+    <atom:link href="{{ page.url | absolute_url }}" rel="self" type="application/rss+xml"/>
+    <description>Derniers dépôts et projets ajoutés sur {{ site.url | remove: "https://" }}</description>
+    <language>fr-fr</language>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <pubDate>{{ last.added | date_to_rfc822 }}</pubDate>
+    {%- for repo in repos limit: 30 %}
+    {%- assign category = site.data.categories | where: "id", repo.category | first %}
+    {%- assign detail = site.projects | where: "slug", repo.slug | first %}
+    {%- if detail %}{% assign link = detail.url | absolute_url %}{% else %}{% assign link = '/projets/' | absolute_url | append: '#' | append: repo.slug %}{% endif %}
+    <item>
+      <title>{{ repo.name | xml_escape }}</title>
+      <link>{{ link }}</link>
+      <guid isPermaLink="false">{{ site.url }}/projets/{{ repo.slug }}</guid>
+      <pubDate>{{ repo.added | date_to_rfc822 }}</pubDate>
+      <category>{{ category.label | xml_escape }}</category>
+      {%- for tag in repo.tags %}
+      <category>{{ tag | xml_escape }}</category>
+      {%- endfor %}
+      <description>{{ repo.description | xml_escape }}{% if repo.repo %} — https://github.com/{{ repo.repo }}{% endif %}</description>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>
