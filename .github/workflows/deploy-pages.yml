@@ -53,10 +53,10 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Récupérer le code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Installer Python (avec cache pip)
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
@@ -103,11 +103,11 @@ jobs:
       pages: read            # lecture de la configuration Pages (configure-pages)
     steps:
       - name: Récupérer le code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Configurer GitHub Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       # Même image Docker et mêmes versions (gem github-pages) que le build
       # « classique » de GitHub Pages : aucun écart entre CI et production.
@@ -121,7 +121,7 @@ jobs:
       # Artefact « github-pages » : déployé par le job deploy ET réutilisé par
       # le job test (un seul build, aucun écart entre site testé et site publié).
       - name: Téléverser l'artefact du site
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./_site
           retention-days: 7
@@ -149,10 +149,10 @@ jobs:
       BUNDLE_WITHOUT: jekyll_plugins   # n'installer que le groupe :test du Gemfile
     steps:
       - name: Récupérer le code (Gemfile, scripts)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Récupérer le site construit
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: github-pages
           path: ${{ runner.temp }}/site
@@ -170,7 +170,7 @@ jobs:
           bundler-cache: true          # bundle install + cache de vendor/bundle
 
       - name: Installer Python (avec cache pip)
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
@@ -231,7 +231,7 @@ jobs:
 
       - name: Archiver les rapports
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: rapports-qualite
           path: ${{ env.REPORTS_DIR }}/
@@ -258,7 +258,7 @@ jobs:
     steps:
       - name: Déployer l'artefact
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       - name: Résumé du déploiement
         env:
