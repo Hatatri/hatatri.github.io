@@ -1,0 +1,267 @@
+# =============================================================================
+#  Build, contrôle qualité et déploiement du site Jekyll sur GitHub Pages
+#
+#   validate ──► build ──► test ──► deploy (uniquement sur main)
+#
+#   validate : syntaxe YAML + schéma de _data/repositories.yml (scripts/validate_data.py)
+#   build    : build Jekyll identique à GitHub Pages (actions/jekyll-build-pages)
+#   test     : validation HTML/CSS (Nu Html Checker) + liens internes (HTMLProofer)
+#   deploy   : publication de l'artefact sur https://hatatri.github.io
+#
+#  Prérequis (une seule fois) : Settings ▸ Pages ▸ Build and deployment ▸
+#  Source = « GitHub Actions ».
+# =============================================================================
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:            # inutile de reconstruire le site pour ces fichiers
+      - "README.md"
+      - ".github/dependabot.yml"
+      - ".github/ISSUE_TEMPLATE/**"
+  pull_request:              # PR : validation + build + tests, SANS déploiement
+    branches: [main]
+  workflow_dispatch:         # lancement manuel (onglet Actions ▸ Run workflow)
+    inputs:
+      verbose:
+        description: "Logs Jekyll détaillés (--verbose)"
+        type: boolean
+        default: false
+
+# Moindre privilège : lecture seule par défaut, droits étendus job par job.
+permissions:
+  contents: read
+
+# Une PR mise à jour annule son build précédent ; sur main, les runs sont mis
+# en file (jamais annulés) pour ne pas interrompre un déploiement.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  LANG: C.UTF-8              # HTMLProofer/Nokogiri lisent les fichiers en UTF-8
+  LC_ALL: C.UTF-8
+  PYTHON_VERSION: "3.12"
+  REPORTS_DIR: reports
+
+jobs:
+  # ---------------------------------------------------------------------------
+  validate:
+    name: Valider YAML et données
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python (avec cache pip)
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Installer les dépendances Python
+        run: pip install --disable-pip-version-check -r scripts/requirements.txt
+
+      - name: Valider _config.yml, _data/, front matter et workflows
+        id: validate
+        run: |
+          set -o pipefail
+          mkdir -p "$REPORTS_DIR"
+          python scripts/validate_data.py 2>&1 | tee "$REPORTS_DIR/validate.log"
+
+      # Analyse statique des workflows (syntaxe, expressions, scripts shell via shellcheck)
+      - name: Vérifier les workflows (actionlint)
+        if: ${{ !cancelled() }}
+        env:
+          ACTIONLINT_VERSION: "1.7.7"
+        run: |
+          bash <(curl -fsSL "https://raw.githubusercontent.com/rhysd/actionlint/v${ACTIONLINT_VERSION}/scripts/download-actionlint.bash") "$ACTIONLINT_VERSION"
+          ./actionlint -color
+
+      - name: Rapport d'erreurs
+        if: failure() && steps.validate.outcome == 'failure'
+        run: |
+          {
+            echo "## ❌ Données invalides"
+            echo "Corrigez les erreurs ci-dessous puis relancez \`python3 scripts/validate_data.py\` en local."
+            echo '```'
+            sed 's/^::[a-z]* file=\([^:]*\)::/\1 — /' "$REPORTS_DIR/validate.log"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ---------------------------------------------------------------------------
+  build:
+    name: Build Jekyll
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: read            # lecture de la configuration Pages (configure-pages)
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Configurer GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # Même image Docker et mêmes versions (gem github-pages) que le build
+      # « classique » de GitHub Pages : aucun écart entre CI et production.
+      - name: Construire le site avec Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+          verbose: ${{ inputs.verbose == true || runner.debug == '1' }}
+
+      # Artefact « github-pages » : déployé par le job deploy ET réutilisé par
+      # le job test (un seul build, aucun écart entre site testé et site publié).
+      - name: Téléverser l'artefact du site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./_site
+          retention-days: 7
+
+      - name: Résumé du build
+        run: |
+          {
+            echo "## 🏗️ Build Jekyll"
+            echo "| Élément | Valeur |"
+            echo "|---|---|"
+            echo "| URL du site | ${{ steps.pages.outputs.base_url }} |"
+            echo "| Pages HTML | $(find _site -name '*.html' | wc -l) |"
+            echo "| Fichiers | $(find _site -type f | wc -l) |"
+            echo "| Taille | $(du -sh _site | cut -f1) |"
+            echo "| Commit | \`${GITHUB_SHA::7}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ---------------------------------------------------------------------------
+  test:
+    name: Tests HTML et liens
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BUNDLE_WITHOUT: jekyll_plugins   # n'installer que le groupe :test du Gemfile
+    steps:
+      - name: Récupérer le code (Gemfile, scripts)
+        uses: actions/checkout@v4
+
+      - name: Récupérer le site construit
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/site
+
+      - name: Extraire l'artefact
+        id: extract
+        run: |
+          mkdir -p _site "$REPORTS_DIR"
+          tar -xf "${{ runner.temp }}/site/artifact.tar" -C _site
+          echo "Pages à contrôler :" && find _site -name '*.html' | sort
+
+      - name: Installer Ruby + gems (cache Bundler)
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true          # bundle install + cache de vendor/bundle
+
+      - name: Installer Python (avec cache pip)
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Installer le validateur HTML (Nu Html Checker)
+        run: pip install --disable-pip-version-check -r scripts/requirements.txt
+
+      # Les deux contrôles s'exécutent même si le premier échoue, pour obtenir
+      # un rapport complet en un seul run.
+      - name: Valider le HTML et le CSS générés
+        id: html
+        if: ${{ !cancelled() && steps.extract.outcome == 'success' }}
+        run: |
+          set -o pipefail
+          html5validator --root _site --also-check-css --format text --log INFO 2>&1 \
+            | tee "$REPORTS_DIR/html5validator.log"
+
+      - name: Vérifier les liens internes, images et scripts
+        id: links
+        if: ${{ !cancelled() && steps.extract.outcome == 'success' }}
+        run: |
+          set -o pipefail
+          bundle exec htmlproofer _site \
+            --disable-external \
+            --no-enforce-https \
+            --checks Links,Images,Scripts,Favicon,OpenGraph \
+            2>&1 | tee "$REPORTS_DIR/htmlproofer.log"
+
+      - name: Rapport des tests
+        if: ${{ !cancelled() }}
+        env:
+          HTML_OUTCOME: ${{ steps.html.outcome }}
+          LINKS_OUTCOME: ${{ steps.links.outcome }}
+        run: |
+          icon() { [ "$1" = "success" ] && echo "✅" || echo "❌ $1"; }
+          details() {  # $1 = outcome, $2 = fichier de log
+            [ "$1" = "failure" ] && [ -s "$2" ] || return 0
+            echo ""
+            echo "<details open><summary><b>$(basename "$2")</b> — 80 dernières lignes</summary>"
+            echo ""
+            echo '```'
+            tail -n 80 "$2"
+            echo '```'
+            echo "</details>"
+          }
+          {
+            echo "## 🔎 Contrôle qualité du site"
+            echo "| Contrôle | Résultat |"
+            echo "|---|---|"
+            echo "| Validation HTML/CSS (Nu Html Checker) | $(icon "$HTML_OUTCOME") |"
+            echo "| Liens internes, images, scripts (HTMLProofer) | $(icon "$LINKS_OUTCOME") |"
+            details "$HTML_OUTCOME" "$REPORTS_DIR/html5validator.log"
+            details "$LINKS_OUTCOME" "$REPORTS_DIR/htmlproofer.log"
+            echo ""
+            echo "Rapports complets : artefact **rapports-qualite** en bas de cette page."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Archiver les rapports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapports-qualite
+          path: ${{ env.REPORTS_DIR }}/
+          retention-days: 14
+          if-no-files-found: ignore
+
+  # ---------------------------------------------------------------------------
+  deploy:
+    name: Déployer sur GitHub Pages
+    needs: [build, test]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write           # publier sur GitHub Pages
+      id-token: write        # prouver l'origine du déploiement (OIDC)
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Un seul déploiement à la fois ; un déploiement en cours n'est jamais annulé.
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+    steps:
+      - name: Déployer l'artefact
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Résumé du déploiement
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          echo "## 🚀 Site publié : $PAGE_URL" >> "$GITHUB_STEP_SUMMARY"

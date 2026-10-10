@@ -1,0 +1,51 @@
+# Formulaire « Proposer un projet » — lié depuis la page /projets/.
+# Quand le propriétaire pose le label « validé » sur l'issue, le workflow
+# .github/workflows/add-repository.yml ajoute automatiquement le projet au site.
+# ⚠ Les titres des champs (label) sont lus par scripts/add_repository.py : ne pas les renommer.
+name: "➕ Proposer un projet"
+description: Proposer un dépôt GitHub à afficher sur https://hatatri.github.io/projets/
+title: "[Projet] "
+labels: ["nouveau-projet"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci ! Après validation (label **validé**), le projet est ajouté automatiquement au site.
+        Le nom, la description, le langage et le site web sont lus depuis GitHub : seuls le dépôt et la catégorie sont obligatoires.
+  - type: input
+    id: repo
+    attributes:
+      label: Dépôt GitHub
+      description: Format propriétaire/nom (le dépôt doit être public).
+      placeholder: Hatatri/mon-depot
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Catégorie
+      options: [enseignement, recherche, web, outils]
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Mots-clés séparés par des virgules (vide = topics du dépôt).
+      placeholder: python, cpge, algorithmique
+  - type: input
+    id: name
+    attributes:
+      label: Nom affiché
+      description: Facultatif (défaut = nom du dépôt).
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Facultatif (défaut = description du dépôt GitHub). Une ou deux phrases.
+  - type: checkboxes
+    id: featured
+    attributes:
+      label: Projet phare
+      options:
+        - label: Afficher ce projet sur la page d'accueil

@@ -1,0 +1,8 @@
+{%- assign nav = "/|Accueil,/projets/|Projets,/projets/chronologie/|Chronologie,/cv.pdf|CV (PDF)" | split: "," -%}
+<nav class="site-nav" aria-label="Navigation principale">
+  {%- for entry in nav -%}
+    {%- assign parts = entry | split: "|" -%}
+    {%- assign href = parts[0] -%}
+    <a class="btn{% if page.url == href %} btn-active{% endif %}" href="{{ href | relative_url }}"{% if page.url == href %} aria-current="page"{% endif %}>{{ parts[1] }}</a>
+  {%- endfor -%}
+</nav>

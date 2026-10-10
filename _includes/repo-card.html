@@ -1,0 +1,53 @@
+{%- comment -%}
+  Carte d'un projet. Paramètre : repo = une entrée de _data/repositories.yml
+  Usage : {% include repo-card.html repo=repo %}
+{%- endcomment -%}
+{%- assign repo = include.repo -%}
+{%- assign category = site.data.categories | where: "id", repo.category | first -%}
+{%- assign detail = site.projects | where: "slug", repo.slug | first -%}
+{%- assign gh_url = nil -%}
+{%- if repo.repo -%}{%- assign gh_url = "https://github.com/" | append: repo.repo -%}{%- endif -%}
+{%- assign main_url = repo.url | default: gh_url -%}
+{%- assign status = repo.status | default: "actif" -%}
+{%- capture search -%}{{ repo.name }} {{ repo.description }} {{ repo.language }} {{ repo.tags | join: " " }}{%- endcapture -%}
+<article class="repo-card{% if repo.featured %} repo-card--featured{% endif %}" id="{{ repo.slug }}"
+         data-category="{{ repo.category }}" data-tags="{{ repo.tags | join: ' ' }}"
+         data-search="{{ search | downcase | escape }}">
+  <div class="repo-card__head">
+    <h3 class="repo-card__title">
+      <a href="{% if detail %}{{ detail.url | relative_url }}{% else %}{{ main_url }}{% endif %}">{{ repo.name }}</a>
+      {%- if repo.featured %} <span class="repo-featured" title="Projet phare">★</span>{% endif %}
+    </h3>
+    <span class="chip chip--category" title="{{ category.description | escape }}">{{ category.emoji }} {{ category.label }}</span>
+  </div>
+
+  <p class="repo-card__desc">{{ repo.description }}</p>
+
+  {%- if gh_url or repo.homepage %}
+  <p class="repo-card__badges">
+    {%- if gh_url %}
+    <img src="https://img.shields.io/github/stars/{{ repo.repo }}?style=flat-square&amp;logo=github&amp;label=%C3%A9toiles" alt="Étoiles GitHub de {{ repo.repo }}" loading="lazy" height="20">
+    <img src="https://img.shields.io/github/last-commit/{{ repo.repo }}?style=flat-square&amp;label=dernier%20commit" alt="Dernier commit de {{ repo.repo }}" loading="lazy" height="20">
+    {%- endif %}
+    {%- if repo.homepage %}
+    <img src="https://img.shields.io/website?url={{ repo.homepage | url_encode }}&amp;style=flat-square&amp;label=site&amp;up_message=en%20ligne&amp;down_message=hors%20ligne" alt="Disponibilité du site {{ repo.homepage }}" loading="lazy" height="20">
+    {%- endif %}
+  </p>
+  {%- endif %}
+
+  <ul class="repo-card__meta">
+    {%- if repo.language %}<li class="chip chip--lang">{{ repo.language }}</li>{% endif %}
+    {%- if status != "actif" %}<li class="chip chip--status">{{ status | replace: "-", " " }}</li>{% endif %}
+    {%- for tag in repo.tags %}<li class="chip chip--tag">#{{ tag }}</li>{% endfor %}
+  </ul>
+
+  <div class="repo-card__foot">
+    <span>Ajouté le <time datetime="{{ repo.added | date: '%Y-%m-%d' }}">{% include date-fr.html date=repo.added %}</time></span>
+    <span class="repo-card__links">
+      {%- if gh_url %}<a href="{{ gh_url }}">GitHub</a>{% endif -%}
+      {%- if repo.url and repo.url != repo.homepage %}{% if gh_url %} · {% endif %}<a href="{{ repo.url }}">Lien</a>{% endif -%}
+      {%- if repo.homepage %}{% if gh_url or repo.url != repo.homepage %} · {% endif %}<a href="{{ repo.homepage }}">Site</a>{% endif -%}
+      {%- if detail %} · <a href="{{ detail.url | relative_url }}">Détails</a>{% endif -%}
+    </span>
+  </div>
+</article>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{%- comment -%}
+  Surcharge du layout du thème jekyll-theme-cayman (v0.2.0) :
+  interface en français, menu de navigation, flux RSS des projets
+  et pied de page personnalisé. Le style du thème est conservé.
+{%- endcomment -%}
+<html lang="{{ site.lang | default: "fr-FR" }}">
+  <head>
+    <meta charset="UTF-8">
+{% seo %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} — nouveaux projets" href="{{ '/projets/feed.xml' | relative_url }}">
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Aller au contenu</a>
+
+    <header class="page-header">
+      <h1 class="project-name">{{ page.title | default: site.title }}</h1>
+      <p class="project-tagline">{{ page.description | default: site.description }}</p>
+      {% include nav.html %}
+    </header>
+
+    <main id="content" class="main-content">
+      {{ content }}
+
+      <footer class="site-footer">
+        <span class="site-footer-owner">© {{ site.time | date: "%Y" }} {{ site.author }} — <a href="{{ '/projets/feed.xml' | relative_url }}">flux RSS des projets</a></span>
+        <span class="site-footer-credits">Généré par <a href="https://pages.github.com">GitHub Pages</a> et déployé avec GitHub Actions.</span>
+      </footer>
+    </main>
+  </body>
+</html>

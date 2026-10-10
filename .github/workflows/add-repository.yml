@@ -1,0 +1,160 @@
+# =============================================================================
+#  Ajout d'un projet validé dans _data/repositories.yml
+#
+#  Deux déclencheurs :
+#   1. Manuel  : onglet Actions ▸ « Ajouter un projet » ▸ Run workflow
+#   2. Issue   : une issue « Nouveau projet » (formulaire) reçoit le label
+#                « validé » posé par le propriétaire du dépôt.
+#
+#  Le workflow lit les métadonnées via l'API GitHub, ajoute l'entrée, valide
+#  les données, commite sur main puis déclenche le déploiement.
+#  (Un push effectué avec GITHUB_TOKEN ne déclenche pas d'autre workflow :
+#   le déploiement est donc lancé explicitement via workflow_dispatch.)
+# =============================================================================
+name: Ajouter un projet
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: "Dépôt GitHub (propriétaire/nom), ex. Hatatri/mon-depot"
+        required: true
+        type: string
+      category:
+        description: "Catégorie"
+        required: true
+        type: choice
+        options: [enseignement, recherche, web, outils]   # = _data/categories.yml
+      tags:
+        description: "Tags séparés par des virgules (vide = topics GitHub)"
+        required: false
+        type: string
+      featured:
+        description: "Afficher sur la page d'accueil"
+        type: boolean
+        default: false
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+# Les ajouts sont traités un par un pour éviter les conflits de push.
+concurrency:
+  group: add-repository
+  cancel-in-progress: false
+
+jobs:
+  add:
+    name: Ajouter le projet
+    # Issue : uniquement le label « validé », posé par le propriétaire du dépôt.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.label.name == 'validé' &&
+       github.event.sender.login == github.repository_owner &&
+       contains(github.event.issue.labels.*.name, 'nouveau-projet'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write        # commit de _data/repositories.yml
+      issues: write          # commentaire + fermeture de l'issue
+      actions: write         # déclenchement du workflow de déploiement
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - name: Récupérer le code (branche par défaut)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Installer Python (avec cache pip)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Installer les dépendances Python
+        run: pip install --disable-pip-version-check -r scripts/requirements.txt
+
+      # Les entrées utilisateur passent par des variables d'environnement
+      # (jamais interpolées dans le script) : pas d'injection de commande.
+      - name: Ajouter l'entrée (déclenchement manuel)
+        id: add_manual
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          REPO: ${{ inputs.repository }}
+          CATEGORY: ${{ inputs.category }}
+          TAGS: ${{ inputs.tags }}
+          FEATURED: ${{ inputs.featured }}
+        run: |
+          args=("$REPO" --category "$CATEGORY")
+          [ -n "$TAGS" ] && args+=(--tags "$TAGS")
+          [ "$FEATURED" = "true" ] && args+=(--featured)
+          python scripts/add_repository.py "${args[@]}"
+
+      - name: Ajouter l'entrée (depuis l'issue)
+        id: add_issue
+        if: github.event_name == 'issues'
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          printf '%s' "$ISSUE_BODY" > "$RUNNER_TEMP/issue.md"
+          python scripts/add_repository.py --from-issue "$RUNNER_TEMP/issue.md"
+
+      - name: Valider les données
+        run: python scripts/validate_data.py
+
+      - name: Commiter et pousser
+        id: commit
+        env:
+          NAME: ${{ steps.add_manual.outputs.name || steps.add_issue.outputs.name }}
+          REPO: ${{ steps.add_manual.outputs.repo || steps.add_issue.outputs.repo }}
+          ISSUE: ${{ github.event.issue.number }}
+          BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/repositories.yml
+          msg="Ajouter le projet ${NAME} (${REPO})"
+          [ -n "$ISSUE" ] && msg="${msg}"$'\n\n'"Proposé dans l'issue #${ISSUE}"
+          git commit -m "$msg"
+          git push origin "HEAD:${BRANCH}"
+          echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Déclencher le déploiement
+        env:
+          BRANCH: ${{ github.event.repository.default_branch }}
+        run: gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
+
+      - name: Commenter et fermer l'issue
+        if: github.event_name == 'issues'
+        env:
+          ISSUE: ${{ github.event.issue.number }}
+          SLUG: ${{ steps.add_issue.outputs.slug }}
+          SHA: ${{ steps.commit.outputs.sha }}
+        run: |
+          gh issue close "$ISSUE" --repo "$GITHUB_REPOSITORY" --reason completed --comment \
+            "✅ Projet ajouté (commit ${SHA}). Il sera visible d'ici quelques minutes sur https://hatatri.github.io/projets/#${SLUG}"
+
+      - name: Signaler l'échec sur l'issue
+        if: failure() && github.event_name == 'issues'
+        env:
+          ISSUE: ${{ github.event.issue.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body \
+            "❌ L'ajout automatique a échoué. Détails : ${RUN_URL}"
+
+      - name: Résumé
+        if: success()
+        env:
+          NAME: ${{ steps.add_manual.outputs.name || steps.add_issue.outputs.name }}
+          SLUG: ${{ steps.add_manual.outputs.slug || steps.add_issue.outputs.slug }}
+        run: |
+          {
+            echo "## ➕ Projet ajouté : ${NAME}"
+            echo "- Entrée : \`_data/repositories.yml\` (slug \`${SLUG}\`)"
+            echo "- Déploiement lancé : https://hatatri.github.io/projets/#${SLUG}"
+          } >> "$GITHUB_STEP_SUMMARY"

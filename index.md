@@ -1,29 +1,9 @@
-
-  
-  <style>
-    .profile {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .profile img {
-      border-radius: 50%;
-      width: 150px;
-      margin-right: 20px;
-    }
-    .profile-info h1 {
-      margin: 0;
-      font-size: 28px;
-      color: #003366;
-    }
-    .profile-info p {
-      margin: 5px 0;
-      color: #555;
-    }
-  </style>
+---
+layout: default
+---
 
 <div class="profile">
-  <img src="Hicham ATATRI.png" alt="Photo de profil">  
+  <img src="{{ '/Hicham%20ATATRI.png' | relative_url }}" alt="Photo de profil de Hicham ATATRI">  
   <div class="profile-info">
     <p>📍 Rabat, Maroc | ✉️ <a href="mailto:hichamatatri@gmail.com">hichamatatri@gmail.com</a></p>
   </div>
@@ -60,10 +40,14 @@
 
 ## Projets
 
-- **[Elprepa](https://elprepa.online)** : plateforme pédagogique des classes préparatoires (cours, séquences, notebooks Python interactifs, rendus, corrections et suivi des élèves).
-- **[Informatique MP : algorithmique](https://github.com/Hatatri/MP-PSI-Algorithmique)** : cours, notebooks et exercices pour la 2ᵉ année MP.
-- **[Mosquée du douar Kariz](https://hatatri.github.io/mosque-ennour/)** : site de collecte de dons pour l’association Al Karama.
-- Tous mes projets publics : [github.com/Hatatri](https://github.com/Hatatri)
+{% assign featured = site.data.repositories | where: "featured", true | sort: "added" | reverse -%}
+{% for repo in featured -%}
+{% assign gh = "https://github.com/" | append: repo.repo -%}
+{% if repo.repo %}{% assign link = repo.homepage | default: repo.url | default: gh %}{% else %}{% assign link = repo.homepage | default: repo.url %}{% endif -%}
+- **[{{ repo.name }}]({{ link }})** : {{ repo.description }}
+{% endfor -%}
+- 👉 **[Voir tous les projets]({{ '/projets/' | relative_url }})** ({{ site.data.repositories | size }} projets, avec statistiques, filtres et [chronologie]({{ '/projets/chronologie/' | relative_url }}))
+- Tous mes dépôts publics : [github.com/Hatatri](https://github.com/Hatatri)
 
 ---
 
@@ -112,13 +96,4 @@
 
 ---
 <!-- Bouton CV -->
-  <p>
-    <a href="cv.pdf" style="background:#fff; color:#004080; padding:10px 20px; 
-       border-radius:20px; text-decoration:none; font-weight:bold;">
-      📄 Télécharger le CV (PDF)
-    </a>
-  </p>
----
-
-
-© Hicham ATATRI
+<p><a class="btn-cv" href="{{ '/cv.pdf' | relative_url }}">📄 Télécharger le CV (PDF)</a></p>

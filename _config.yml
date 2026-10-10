@@ -1,4 +1,48 @@
+# ---------------------------------------------------------------------------
+# Configuration Jekyll — https://hatatri.github.io
+# Le build est réalisé par GitHub Actions (.github/workflows/deploy-pages.yml)
+# avec la même version de Jekyll que GitHub Pages (gem "github-pages").
+# ---------------------------------------------------------------------------
 title: "Hicham ATATRI"
+description: "Professeur agrégé d'informatique en CPGE — transmettre le savoir, former les ingénieurs de demain."
+author: "Hicham ATATRI"
+lang: fr-FR
+url: "https://hatatri.github.io"
+baseurl: ""
+github_username: Hatatri
 theme: jekyll-theme-cayman
+
+# Plugins autorisés par GitHub Pages (aucun plugin hors liste blanche)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Lien du formulaire « Proposer un projet » (issue form GitHub)
+proposal_url: "https://github.com/Hatatri/hatatri.github.io/issues/new?template=nouveau-projet.yml"
+
+# Collection optionnelle : une page détaillée par projet.
+# Le nom du fichier (_projects/<slug>.md) doit correspondre au `slug`
+# déclaré dans _data/repositories.yml (vérifié par scripts/validate_data.py).
+collections:
+  projects:
+    output: true
+    permalink: /projets/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
 exclude:
   - README.md
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - vendor/
+  - node_modules/
