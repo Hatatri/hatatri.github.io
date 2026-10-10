@@ -37,7 +37,7 @@ $surface: #f8fbfd;
   flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 20px;
-  img { border-radius: 50%; width: 150px; }
+  img { border-radius: 50%; width: 150px; height: 150px; object-fit: cover; }
   p { margin: 5px 0; color: #555; }
 }
 

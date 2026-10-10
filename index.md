@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="profile">
-  <img src="{{ '/Hicham%20ATATRI.png' | relative_url }}" alt="Photo de profil de Hicham ATATRI">  
+  <img src="{{ '/assets/img/hicham-atatri.jpg' | relative_url }}" alt="Photo de profil de Hicham ATATRI" width="150" height="150">  
   <div class="profile-info">
     <p>📍 Rabat, Maroc | ✉️ <a href="mailto:hichamatatri@gmail.com">hichamatatri@gmail.com</a></p>
   </div>

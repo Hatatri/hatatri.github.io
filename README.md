@@ -59,7 +59,8 @@ Site personnel de **Hicham ATATRI**, professeur agrégé d'informatique en CPGE.
 │   └── dependabot.yml             Mises à jour des actions, gems et paquets pip
 ├── index.md                       Page d'accueil (la section « Projets » lit _data/repositories.yml)
 ├── Gemfile / Gemfile.lock         Environnement Ruby identique à GitHub Pages + HTMLProofer
-├── cv.pdf, Hicham ATATRI.png      CV et photo de profil
+├── assets/img/hicham-atatri.jpg   Photo de profil (480×480)
+├── cv.pdf                         CV téléchargeable
 └── README.md                      Ce fichier (exclu du site)
 ```
 
